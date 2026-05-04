@@ -1,0 +1,105 @@
+VARIABLES GLOBALES NECESSAIRES
+
+
+#include "arm_math.h"  // CMSIS-DSP library
+
+// Données capteur globales (remplies dans une autre routine)
+volatile float gyro[3];         // Vélocités angulaires (rad/s)
+volatile float accel[3];        // Accélération linéaire (m/s²), si disponible
+volatile uint8_t accel_ready;   // Flag pour savoir si l'accélération est disponible
+
+// Variables pour le filtre Madgwick
+volatile float quaternion[4] = {1.0f, 0.0f, 0.0f, 0.0f};  // Quaternion initial
+volatile float beta = 0.1f;      // Gain Madgwick
+const float dt = 0.001f;         // Intervalle de temps (1 ms)
+
+// PID Controllers (CMSIS-DSP structures)
+arm_pid_instance_f32 pid_roll_rate, pid_pitch_rate, pid_yaw_rate;  // Boucle interne
+arm_pid_instance_f32 pid_roll_angle, pid_pitch_angle, pid_yaw_angle;  // Boucle externe
+
+// Commandes PID (sorties)
+volatile float pid_rate_out[3] = {0.0f, 0.0f, 0.0f};  // Roll, Pitch, Yaw rates
+volatile float pid_angle_out[3] = {0.0f, 0.0f, 0.0f}; // Roll, Pitch, Yaw angles
+
+
+INIT DES PID 
+
+
+void pid_init() {
+    // Initialisation des boucles PID internes (rates)
+    pid_roll_rate.Kp = 0.1f; pid_roll_rate.Ki = 0.01f; pid_roll_rate.Kd = 0.005f;
+    pid_pitch_rate.Kp = 0.1f; pid_pitch_rate.Ki = 0.01f; pid_pitch_rate.Kd = 0.005f;
+    pid_yaw_rate.Kp = 0.05f; pid_yaw_rate.Ki = 0.01f; pid_yaw_rate.Kd = 0.002f;
+    arm_pid_init_f32(&pid_roll_rate, 1);
+    arm_pid_init_f32(&pid_pitch_rate, 1);
+    arm_pid_init_f32(&pid_yaw_rate, 1);
+
+    // Initialisation des boucles PID externes (angles)
+    pid_roll_angle.Kp = 0.2f; pid_roll_angle.Ki = 0.01f; pid_roll_angle.Kd = 0.01f;
+    pid_pitch_angle.Kp = 0.2f; pid_pitch_angle.Ki = 0.01f; pid_pitch_angle.Kd = 0.01f;
+    pid_yaw_angle.Kp = 0.1f; pid_yaw_angle.Ki = 0.01f; pid_yaw_angle.Kd = 0.005f;
+    arm_pid_init_f32(&pid_roll_angle, 1);
+    arm_pid_init_f32(&pid_pitch_angle, 1);
+    arm_pid_init_f32(&pid_yaw_angle, 1);
+}
+
+
+ROUTINE INTERRUPT OPTIMISÉE
+
+
+void imu_control_isr() {
+    // --- Étape 1 : Prédiction rapide de l'orientation (Gyroscope) ---
+    float q_dot[4];
+    q_dot[0] = 0.5f * (-quaternion[1] * gyro[0] - quaternion[2] * gyro[1] - quaternion[3] * gyro[2]);
+    q_dot[1] = 0.5f * ( quaternion[0] * gyro[0] + quaternion[2] * gyro[2] - quaternion[3] * gyro[1]);
+    q_dot[2] = 0.5f * ( quaternion[0] * gyro[1] - quaternion[1] * gyro[2] + quaternion[3] * gyro[0]);
+    q_dot[3] = 0.5f * ( quaternion[0] * gyro[2] + quaternion[1] * gyro[1] - quaternion[2] * gyro[0]);
+
+    // Intégration pour mettre à jour le quaternion
+    for (int i = 0; i < 4; i++) {
+        quaternion[i] += q_dot[i] * dt;
+    }
+    arm_sqrt_f32(quaternion[0] * quaternion[0] + quaternion[1] * quaternion[1] +
+                 quaternion[2] * quaternion[2] + quaternion[3] * quaternion[3], &quaternion[0]);
+    for (int i = 0; i < 4; i++) {
+        quaternion[i] /= quaternion[0];  // Normalisation
+    }
+
+    // --- Étape 2 : Correction par l'accéléromètre (si disponible) ---
+    if (accel_ready) {
+        float norm = arm_sqrt_f32(accel[0] * accel[0] + accel[1] * accel[1] + accel[2] * accel[2]);
+        for (int i = 0; i < 3; i++) accel[i] /= norm;
+
+        float error[3] = {
+            accel[1] * (2.0f * quaternion[2] * quaternion[3] - 2.0f * quaternion[0] * quaternion[1]),
+            accel[0] * (2.0f * quaternion[0] * quaternion[2] - 2.0f * quaternion[1] * quaternion[3]),
+            accel[0] * quaternion[1] + accel[1] * quaternion[2] + accel[2] * quaternion[3]
+        };
+
+        // Correction gyroscope avec erreur
+        gyro[0] += beta * error[0];
+        gyro[1] += beta * error[1];
+        gyro[2] += beta * error[2];
+    }
+
+    // --- Étape 3 : Conversion quaternion -> angles ---
+    float roll  = atan2f(2.0f * (quaternion[0] * quaternion[1] + quaternion[2] * quaternion[3]),
+                         1.0f - 2.0f * (quaternion[1] * quaternion[1] + quaternion[2] * quaternion[2]));
+    float pitch = asinf(2.0f * (quaternion[0] * quaternion[2] - quaternion[3] * quaternion[1]));
+    float yaw   = atan2f(2.0f * (quaternion[0] * quaternion[3] + quaternion[1] * quaternion[2]),
+                         1.0f - 2.0f * (quaternion[2] * quaternion[2] + quaternion[3] * quaternion[3]));
+
+    // --- Étape 4 : PID ---
+    // Boucle interne (rates)
+    pid_rate_out[0] = arm_pid_f32(&pid_roll_rate, gyro[0]);
+    pid_rate_out[1] = arm_pid_f32(&pid_pitch_rate, gyro[1]);
+    pid_rate_out[2] = arm_pid_f32(&pid_yaw_rate, gyro[2]);
+
+    // Boucle externe (angles)
+    pid_angle_out[0] = arm_pid_f32(&pid_roll_angle, roll);
+    pid_angle_out[1] = arm_pid_f32(&pid_pitch_angle, pitch);
+    pid_angle_out[2] = arm_pid_f32(&pid_yaw_angle, yaw);
+
+    // Commande finale aux ESC (mixer)
+    send_to_esc(mix_throttle(pid_rate_out, pid_angle_out));
+}
