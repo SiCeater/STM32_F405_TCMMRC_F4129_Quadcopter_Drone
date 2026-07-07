@@ -49,11 +49,13 @@ file(GLOB_RECURSE USER_SOURCES
 )
 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
+    # Add user sources here
     ${USER_SOURCES}
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
+    # Add user defined include paths
     ${CMAKE_SOURCE_DIR}/App/Inc
 )
 
