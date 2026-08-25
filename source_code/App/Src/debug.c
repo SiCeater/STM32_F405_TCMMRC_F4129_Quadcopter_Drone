@@ -21,17 +21,6 @@ void UART_Debug_Transmit_Buffer_LL(uint8_t *data, uint16_t size)
   while (!LL_USART_IsActiveFlag_TC(UART5));
 }
 
-/**
- * @brief affichage des données reçues de la télécommande sur l'UART de debug (5)
- *
- */
-void print_remote_data()
-{
-  char tab_uart_debug[50] = {0};
-  sprintf(tab_uart_debug, "\nY_D:%3d X_D:%3d Y_G:%3d X_G:%3d B_D:%d B_G:%d", trame_decodee[0], trame_decodee[1], trame_decodee[2], trame_decodee[3], trame_decodee[4], trame_decodee[5]);
-  UART_Debug_Transmit_Buffer_LL((uint8_t *)tab_uart_debug, 44);
-}
-
 /* ─── Debug UART5 — gyro en DPS au dixième, ASCII, no float ────────────── */
 /*
  * Conversion : raw × 10 / 164  →  dps × 10  en int16

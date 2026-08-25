@@ -5,6 +5,7 @@
  */
  
 #include "mpu6000_driver.h"
+#include "global.h"
  
  
 /* ─── Instance publique ─────────────────────────────────────────────────── */
@@ -87,7 +88,7 @@ static uint8_t spi_read_reg(uint8_t reg)
  
 void MPU6000_Init(void)
 {
-    if (debug)
+    if (debug_init)
         print_to_console("\n\r\n\rMPU6000 : initialisation...", sizeof("\n\r\n\rMPU6000 : initialisation..."));
  
     LL_SPI_Enable(SPI1);
@@ -107,24 +108,24 @@ void MPU6000_Init(void)
         uint8_t cfg = spi_read_reg(MPU6000_REG_PWR_MGMT_1);
         if (cfg != 0x01U) {
             // cfg vaut probablement 0x00 → write raté
-            if (debug)
+            if (debug_init)
                 print_to_console("\n\rREG_PWR_MGMT_1 MISMATCH", sizeof("\n\rREG_PWR_MGMT_1 MISMATCH"));
             while(1);
         }
         else {
-            if (debug)
+            if (debug_init)
                 print_to_console("\n\rMPU6000 : REG_PWR_MGMT_1 OK", sizeof("\n\rMPU6000 : REG_PWR_MGMT_1 OK"));
         }
  
     /* ── 3. Vérification WHO_AM_I ── */
     if(spi_read_reg(MPU6000_REG_WHO_AM_I) != MPU6000_WHO_AM_I_VAL) {
         /* MPU6000 absent ou adresse SPI incorrecte */
-        if(debug)
+        if(debug_init)
             print_to_console("\n\rMPU6000 : REG_WHO_AM_I FAILED", sizeof("\n\rMPU6000 : REG_WHO_AM_I FAILED"));
         while(1);  /* stopper le firmware — MPU6000 non détecté */
     }
     else {
-        if(debug)
+        if(debug_init)
             print_to_console("\n\rMPU6000 : REG_WHO_AM_I OK", sizeof("\n\rMPU6000 : REG_WHO_AM_I OK"));
     }
  
@@ -139,11 +140,12 @@ void MPU6000_Init(void)
     cfg = spi_read_reg(MPU6000_REG_CONFIG);
     if (cfg != 0x00U) {
         // cfg vaut probablement 0x00 → write raté
-        print_to_console("\n\rREG_CONFIG MISMATCH", sizeof("\n\rREG_CONFIG MISMATCH"));
+        if (debug_init)
+            print_to_console("\n\rREG_CONFIG MISMATCH", sizeof("\n\rREG_CONFIG MISMATCH"));
         while(1);
     }
     else {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rMPU6000 : REG_CONFIG OK", sizeof("\n\rMPU6000 : REG_CONFIG OK"));
     }
  
@@ -159,12 +161,12 @@ void MPU6000_Init(void)
     cfg = spi_read_reg(MPU6000_REG_SMPLRT_DIV);
     if (cfg != 0x07U) {
         // cfg vaut probablement 0x00 → write raté
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rREG_SMPLRT_DIV MISMATCH", sizeof("\n\rREG_SMPLRT_DIV MISMATCH"));
         while(1);
     }
     else {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rMPU6000 : REG_SMPLRT_DIV OK", sizeof("\n\rMPU6000 : REG_SMPLRT_DIV OK"));
     }
  
@@ -178,12 +180,12 @@ void MPU6000_Init(void)
     LL_mDelay(150);
     cfg = spi_read_reg(MPU6000_REG_GYRO_CONFIG);
     if (cfg != MPU6000_GYRO_FSR_2000_DPS) {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rREG_GYRO_CONFIG MISMATCH", sizeof("\n\rREG_GYRO_CONFIG MISMATCH"));
         while(1);
     }
     else {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rMPU6000 : REG_GYRO_CONFIG OK", sizeof("\n\rMPU6000 : REG_GYRO_CONFIG OK"));
     }
  
@@ -196,12 +198,12 @@ void MPU6000_Init(void)
     LL_mDelay(150);
     cfg = spi_read_reg(MPU6000_REG_ACCEL_CONFIG);
     if (cfg != MPU6000_ACCEL_FSR_8G) {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rREG_ACCEL_CONFIG MISMATCH", sizeof("\n\rREG_ACCEL_CONFIG MISMATCH"));
         while(1);
     }
     else {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rMPU6000 : REG_ACCEL_CONFIG OK", sizeof("\n\rMPU6000 : REG_ACCEL_CONFIG OK"));
     }
     /* ── 7. INT_PIN_CFG : configuration de la broche INT ── */
@@ -218,12 +220,12 @@ void MPU6000_Init(void)
     cfg = spi_read_reg(MPU6000_REG_INT_PIN_CFG);
     if (cfg != 0x30U) {
         // cfg vaut probablement 0x00 → write raté
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rREG_INT_PIN_CFG MISMATCH", sizeof("\n\rREG_INT_PIN_CFG MISMATCH"));
         while(1);
     }
     else {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rMPU6000 : REG_INT_PIN_CFG OK", sizeof("\n\rMPU6000 : REG_INT_PIN_CFG OK"));
     }
     /* ── 9. USER_CTRL : désactiver I2C, garder SPI uniquement ── */
@@ -237,12 +239,12 @@ void MPU6000_Init(void)
     cfg = spi_read_reg(MPU6000_REG_USER_CTRL);
     if (cfg != 0x10U) {
         // cfg vaut probablement 0x00 → write raté
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rREG_USER_CTRL MISMATCH", sizeof("\n\rREG_USER_CTRL MISMATCH"));
         while(1);
     }
     else {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rMPU6000 : REG_USER_CTRL OK", sizeof("\n\rMPU6000 : REG_USER_CTRL OK"));
     }
     /* ── 10. Préparer le buffer TX DMA ── */
@@ -255,7 +257,7 @@ void MPU6000_Init(void)
     memset(&dma_tx_buf[1], 0x00U, MPU6000_BURST_LEN - 1U);
  
     /* ── 11. Configurer les streams DMA ── */
-// Seul ajout nécessaire : lier les adresses mémoire/périph aux streams
+    // Seul ajout nécessaire : lier les adresses mémoire/périph aux streams
     // (CubeMX laisse ces champs à 0, ils sont transaction-dépendants)
     LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_0, LL_SPI_DMA_GetRegAddr(SPI1));
     LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_0, (uint32_t)dma_rx_buf);
@@ -271,16 +273,16 @@ void MPU6000_Init(void)
     cfg = spi_read_reg(MPU6000_REG_INT_ENABLE);
     if (cfg != 0x01U) {
         // cfg vaut probablement 0x00 → write raté
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rREG_INT_ENABLE MISMATCH", sizeof("\n\rREG_INT_ENABLE MISMATCH"));
         while(1);
     }
     else {
-        if (debug)
+        if (debug_init)
             print_to_console("\n\rMPU6000 : REG_INT_ENABLE OK", sizeof("\n\rMPU6000 : REG_INT_ENABLE OK"));
     }
  
-    if (debug)
+    if (debug_init)
         print_to_console("\n\rMPU6000 : initialized", sizeof("\n\rMPU6000 : initialized")); 
  
     /* ── 9. Configurer NVIC pour EXTI3 (INT DATA_RDY) ── */
@@ -581,10 +583,12 @@ void MPU6000_DMA_RX_Complete_Callback(void)
     // ─────────────────────────────────────────────────────────────────────────
     // Debug print (fusion gyro + accel)
     // ─────────────────────────────────────────────────────────────────────────
-    UART_Debug_Transmit_Buffer_LL((uint8_t*)"\n\rR:", 4);
-    print_roll_deg(roll_angle);
-    UART_Debug_Transmit_Buffer_LL((uint8_t*)" P:", 3);
-    print_pitch_deg(pitch_angle);
+    if (debug_imu) {
+        UART_Debug_Transmit_Buffer_LL((uint8_t*)"\n\rR:", 4);
+        print_roll_deg(roll_angle);
+        UART_Debug_Transmit_Buffer_LL((uint8_t*)" P:", 3);
+        print_pitch_deg(pitch_angle);
+    }
 
     /* ══════════════════════════════════════════════════════════════════════════
     * FIN DU CODE DE DÉMONSTRATION

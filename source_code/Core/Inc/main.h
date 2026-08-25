@@ -77,8 +77,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define NBUZ_Pin LL_GPIO_PIN_13
 #define NBUZ_GPIO_Port GPIOC
-#define BNO085_SPI_CS_Pin LL_GPIO_PIN_1
-#define BNO085_SPI_CS_GPIO_Port GPIOC
 #define MPU6000_SPI_CS_Pin LL_GPIO_PIN_2
 #define MPU6000_SPI_CS_GPIO_Port GPIOC
 #define MPU6000_INT_Pin LL_GPIO_PIN_3
@@ -86,8 +84,6 @@ void Error_Handler(void);
 #define MPU6000_INT_EXTI_IRQn EXTI3_IRQn
 #define RC_TX_Pin LL_GPIO_PIN_2
 #define RC_TX_GPIO_Port GPIOA
-#define RC_RX_Pin LL_GPIO_PIN_3
-#define RC_RX_GPIO_Port GPIOA
 #define MPU6000_SPI_SCK_Pin LL_GPIO_PIN_5
 #define MPU6000_SPI_SCK_GPIO_Port GPIOA
 #define MPU6000_SPI_MISO_Pin LL_GPIO_PIN_6
@@ -96,10 +92,6 @@ void Error_Handler(void);
 #define MPU6000_SPI_MOSI_GPIO_Port GPIOA
 #define BAT_Pin LL_GPIO_PIN_5
 #define BAT_GPIO_Port GPIOC
-#define BNO085_INT_Pin LL_GPIO_PIN_0
-#define BNO085_INT_GPIO_Port GPIOB
-#define BNO085_PS0_WAKE_Pin LL_GPIO_PIN_2
-#define BNO085_PS0_WAKE_GPIO_Port GPIOB
 #define ESC_M3_Pin LL_GPIO_PIN_6
 #define ESC_M3_GPIO_Port GPIOC
 #define ESC_M2_Pin LL_GPIO_PIN_7
@@ -112,18 +104,10 @@ void Error_Handler(void);
 #define DEBUG_TX_GPIO_Port GPIOC
 #define DEBUG_RX_Pin LL_GPIO_PIN_2
 #define DEBUG_RX_GPIO_Port GPIOD
-#define BNO085_SPI_SCK_Pin LL_GPIO_PIN_3
-#define BNO085_SPI_SCK_GPIO_Port GPIOB
-#define BNO085_SPI_MISO_Pin LL_GPIO_PIN_4
-#define BNO085_SPI_MISO_GPIO_Port GPIOB
-#define BNO085_SPI_MOSI_Pin LL_GPIO_PIN_5
-#define BNO085_SPI_MOSI_GPIO_Port GPIOB
 #define BMP280_I2C_SCL_Pin LL_GPIO_PIN_6
 #define BMP280_I2C_SCL_GPIO_Port GPIOB
 #define BMP280_I2C_SDA_Pin LL_GPIO_PIN_7
 #define BMP280_I2C_SDA_GPIO_Port GPIOB
-#define BNO085_RST_Pin LL_GPIO_PIN_8
-#define BNO085_RST_GPIO_Port GPIOB
 #define LED_Pin LL_GPIO_PIN_9
 #define LED_GPIO_Port GPIOB
 #ifndef NVIC_PRIORITYGROUP_0

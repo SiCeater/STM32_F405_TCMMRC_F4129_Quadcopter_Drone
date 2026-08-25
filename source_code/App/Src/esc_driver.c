@@ -33,15 +33,16 @@ void ESC_Init()
 
     // calibration des ESCs : on les met à 3000 (250µs) pendant 2 secondes pour qu'ils reconnaissent le signal minimum
     // et ensuite on les met à 0 (125µs) pendant 2 secondes pour qu'ils reconnaissent le signal de stop
-    LED_On();
+    
+    // LED_On();
     ESC_Set_Values(3000,3000,3000,3000);
     LL_mDelay(2000);
     ESC_Set_Values(0,0,0,0);
     LL_mDelay(2000);
-    LED_Off();
+    // LED_Off();
 
     // Debug optionnel
-    if (debug)
+    if (debug_init)
     {
         print_to_console("\n\rESCs : initialized and calibrated", 36);
     }

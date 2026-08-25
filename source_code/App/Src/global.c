@@ -1,25 +1,28 @@
 #include "global.h"
 
-uint8_t transmit[7] = {0};
-uint8_t trame_decodee[6] = {0};
-bool remote_already_seen = false;
-bool connected_flag = false;
-bool debug = false;
-uint16_t top_left_motor = 0;
-uint16_t top_right_motor = 0;
-uint16_t bottom_left_motor = 0;
-uint16_t bottom_right_motor = 0;
-uint8_t mag_adjust[3] = {0};
-uint8_t imu_spi_miso_buffer[32] = {0};
-bool DMA_transfer_flag = 0;
+uint8_t elrs_buffer[128] = {0};
+
+bool debug_init = false;
+bool debug_rc = false;
+bool debug_imu = false;
+bool debug_warn = true;
+
 int16_t AccData[3] = {0};
 int16_t MagData[3] = {0};
 int16_t GyroData[3] = {0};
-uint8_t missed_transfers;
-uint8_t max_missed_transfers=10;
-uint16_t debug_count=0;
 
 uint16_t m1=3000;
 uint16_t m2=3000;
 uint16_t m3=3000;
 uint16_t m4=3000;
+uint16_t m5=3000;
+uint16_t m6=3000;
+uint16_t m7=3000;
+uint16_t m8=3000;
+
+volatile uint32_t ms_counter = 0;
+
+uint32_t get_ms(void)
+{
+    return ms_counter;
+}

@@ -7,27 +7,27 @@
 #include <stdio.h>
 #include <string.h>
 
-extern uint8_t transmit[7];
-extern uint8_t trame_decodee[6];
-extern bool connected_flag;
-extern bool debug;
-extern bool remote_already_seen;
-extern uint16_t top_left_motor;
-extern uint16_t top_right_motor;
-extern uint16_t bottom_left_motor;
-extern uint16_t bottom_right_motor;
-extern uint8_t mag_adjust[3];
-extern uint8_t imu_spi_miso_buffer[32];
-extern bool DMA_transfer_flag;
+extern uint8_t elrs_buffer[128];
+
+extern bool debug_init;
+extern bool debug_rc;
+extern bool debug_imu;
+extern bool debug_warn;
+
+extern int16_t AccData[3];
+extern int16_t MagData[3];
 extern int16_t GyroData[3];
-extern uint8_t missed_transfers;
-extern uint8_t max_missed_transfers;
-extern uint16_t debug_count;
 
 extern uint16_t m1;
 extern uint16_t m2;
 extern uint16_t m3;
 extern uint16_t m4;
+extern uint16_t m5;
+extern uint16_t m6;
+extern uint16_t m7;
+extern uint16_t m8;
+
+uint32_t get_ms(void);
 
 #endif
     
