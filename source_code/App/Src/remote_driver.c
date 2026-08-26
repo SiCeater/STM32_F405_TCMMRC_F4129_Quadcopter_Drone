@@ -449,4 +449,5 @@ void Remote_Init(void)
     LL_USART_EnableIT_IDLE(USART2);
     /* NVIC : vérifier que USART2_IRQn est bien activé côté CubeMX (NVIC_EnableIRQ),
      * ce driver ne le fait pas pour ne pas dupliquer une config déjà générée. */
+    print_to_console("\n\rRemote driver initialized", sizeof("\n\rRemote driver initialized"));
 }

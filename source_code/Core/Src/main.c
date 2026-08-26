@@ -78,7 +78,10 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-  debug =1;
+  debug_init =1;
+  debug_rc = 1;
+  debug_imu = 1;
+  debug_warn = 1;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
