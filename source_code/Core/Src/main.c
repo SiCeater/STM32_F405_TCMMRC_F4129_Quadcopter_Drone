@@ -121,7 +121,8 @@ int main(void)
   //ESC_Init();
   //ESC_Test();
   //MPU6000_Init();
-  Remote_Init();
+  //Remote_Init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

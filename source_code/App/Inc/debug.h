@@ -6,7 +6,6 @@
 
 void UART_Debug_Transmit_Char_LL(uint8_t c);
 void UART_Debug_Transmit_Buffer_LL(uint8_t *data, uint16_t size);
-void print_remote_data();
 void print_gyro_data(int16_t dps_x10);
 void print_accel_data(int16_t g_x10);
 void print_gyro_rads(int32_t rad_x1000);
