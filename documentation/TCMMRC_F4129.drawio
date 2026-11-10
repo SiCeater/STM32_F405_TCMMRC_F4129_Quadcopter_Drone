@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.3.1 Safari/605.1.15" version="29.6.6">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.3.1 Safari/605.1.15">
   <diagram name="Page-1" id="Awe2TJ60lS6z-9maPt37">
-    <mxGraphModel dx="1733" dy="695" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="light-dark(#FFFFFF,#1E1E1E)" math="0" shadow="0">
+    <mxGraphModel dx="2496" dy="2246" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="light-dark(#FFFFFF,#1E1E1E)" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1048,25 +1048,25 @@
         <mxCell id="EuCzKSsCZSFyFusstykv-293" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="NC (USB&lt;sup&gt;+&lt;/sup&gt;)" vertex="1">
           <mxGeometry height="30" width="130" x="1280" y="1390" as="geometry" />
         </mxCell>
-        <mxCell id="EuCzKSsCZSFyFusstykv-294" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB8 / GPIO [ BNO085_RST ] (ST)" vertex="1">
+        <mxCell id="EuCzKSsCZSFyFusstykv-294" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB8 (ST)" vertex="1">
           <mxGeometry height="30" width="410" x="1280" y="1440" as="geometry" />
         </mxCell>
-        <mxCell id="EuCzKSsCZSFyFusstykv-296" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PC1 / GPIO [ BNO085_SPI_CS ]" vertex="1">
+        <mxCell id="EuCzKSsCZSFyFusstykv-296" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PC1" vertex="1">
           <mxGeometry height="30" width="350" x="1280" y="1460" as="geometry" />
         </mxCell>
-        <mxCell id="EuCzKSsCZSFyFusstykv-297" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB5 / SPI3_MOSI [ BNO085_SPI_MOSI ]" vertex="1">
+        <mxCell id="EuCzKSsCZSFyFusstykv-297" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB5" vertex="1">
           <mxGeometry height="30" width="410" x="1280" y="1480" as="geometry" />
         </mxCell>
         <mxCell id="EuCzKSsCZSFyFusstykv-298" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="VDD (3.3V)" vertex="1">
           <mxGeometry height="30" width="300" x="1280" y="1500" as="geometry" />
         </mxCell>
-        <mxCell id="EuCzKSsCZSFyFusstykv-299" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB3 / SPI3_SCK [ BNO085_SPI_SCK ]" vertex="1">
+        <mxCell id="EuCzKSsCZSFyFusstykv-299" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB3" vertex="1">
           <mxGeometry height="30" width="370" x="1280" y="1700" as="geometry" />
         </mxCell>
         <mxCell id="EuCzKSsCZSFyFusstykv-300" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="VSS (GND)" vertex="1">
           <mxGeometry height="30" width="400" x="1280" y="1720" as="geometry" />
         </mxCell>
-        <mxCell id="EuCzKSsCZSFyFusstykv-301" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB4 / SPI3_MISO [ BNO085_SPI_MISO ]" vertex="1">
+        <mxCell id="EuCzKSsCZSFyFusstykv-301" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB4" vertex="1">
           <mxGeometry height="30" width="420" x="1280" y="1740" as="geometry" />
         </mxCell>
         <mxCell id="EuCzKSsCZSFyFusstykv-303" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PA3 (RX2)" vertex="1">
@@ -1093,7 +1093,7 @@
         <mxCell id="EuCzKSsCZSFyFusstykv-310" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PD2 / UART5_RX [ DEBUG_RX ] (RX5)" vertex="1">
           <mxGeometry height="30" width="380" x="1280" y="2040" as="geometry" />
         </mxCell>
-        <mxCell id="EuCzKSsCZSFyFusstykv-311" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB0 / GPIO_EXTI0 [ BNO085_INT ] (PB0)" vertex="1">
+        <mxCell id="EuCzKSsCZSFyFusstykv-311" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PB0 (PB0)" vertex="1">
           <mxGeometry height="30" width="442" x="1280" y="2060" as="geometry" />
         </mxCell>
         <mxCell id="EuCzKSsCZSFyFusstykv-320" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeWidth=2;jumpSize=6;endSize=6;targetPerimeterSpacing=0;startSize=6;sourcePerimeterSpacing=0;jumpStyle=none;anchorPointDirection=0;strokeColor=light-dark(#000000,#FFFFFF);fontColor=light-dark(#000000,#FFFFFF);" value="">
@@ -1198,23 +1198,11 @@
             <mxPoint x="189" y="1965" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="p9oZkoEugu4d8DZcmLiy-2" edge="1" parent="1" source="p9oZkoEugu4d8DZcmLiy-1" style="endArrow=none;html=1;rounded=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" value="">
+        <mxCell id="p9oZkoEugu4d8DZcmLiy-2" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="400" y="1780" as="sourcePoint" />
+            <mxPoint x="720.0000000000002" y="1780.5" as="sourcePoint" />
             <mxPoint x="720" y="1780" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="p9oZkoEugu4d8DZcmLiy-3" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;strokeWidth=3;strokeColor=light-dark(#000000,#FFFFFF);" target="p9oZkoEugu4d8DZcmLiy-1" value="">
-          <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="400" y="1780" as="sourcePoint" />
-            <mxPoint x="720" y="1780" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="p9oZkoEugu4d8DZcmLiy-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=light-dark(#FFD966,#FFD966);" value="" vertex="1">
-          <mxGeometry height="7" width="7" x="720" y="1777" as="geometry" />
-        </mxCell>
-        <mxCell id="p9oZkoEugu4d8DZcmLiy-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;rounded=0;fontSize=20;fontColor=light-dark(#000000,#FFFFFF);" value="PA15 / GPIO [ BNO085_PS0_WAKE ] (S5)" vertex="1">
-          <mxGeometry height="30" width="410" x="-10" y="1760" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
